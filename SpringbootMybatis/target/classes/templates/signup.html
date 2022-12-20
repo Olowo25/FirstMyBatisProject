@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th ="http://www.thymeleaf.org" >
+<head>
+<meta charset ="UTF-8" ></meta>
+<meta name ="viewport" content ="width=device-width, initial-scale=1, shrink-to-fit=no" >
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<title th:text ="#{user.signup.title}" ></title>
+<style type="text/css">
+.form-signup {
+width : 100% ;
+max-width : 330px ;
+padding : 15px ;
+margin : auto ;
+}
+</style>
+</head>
+<body class ="bg-light" >
+<form id ="signup-form" method ="post" action ="/user/signup" class ="form-signup" th:object ="${signupForm}" >
+<h1 class ="text-center" th:text ="#{user.signup.title}" ></h1>
+<!-- User ID -->
+<div class ="form-group" >
+<label for ="userId" th:text ="#{userId}" ></label>
+<input type ="text" class ="form-control" th:field ="*{userId}"
+th:errorclass ="is-invalid" />
+<div class ="invalid-feedback" th:errors ="*{userId}" ></div>
+</div>
+<!-- Password -->
+<div class ="form-group" >
+<label for ="password" th:text ="#{password}" ></label>
+<input type ="text" class ="form-control" th:field ="*{password}"
+th:errorclass ="is-invalid" />
+<div class ="invalid-feedback" th:errors ="*{password}" ></div>
+</div>
+<!-- User Name -->
+<div class ="form-group" >
+<label for ="userName" th:text ="#{userName}" ></label>
+<input type ="text" class ="form-control" th:field ="*{userName}"
+th:errorclass ="is-invalid" />
+<div class ="invalid-feedback" th:errors ="*{userName}" ></div>
+</div>
+<!-- Birthday -->
+<div class ="form-group" >
+<label for ="birthday" th:text ="#{birthday}" ></label>
+<input type ="text" class ="form-control" placeholder ="dd/MM/yyyy" th:field ="*{birthday}"  th:errorclass ="is-invalid" />
+<div class ="invalid-feedback" th:errors ="*{birthday}" ></div>
+</div>
+<!-- Age -->
+<div class ="form-group" >
+<label for ="age" th:text ="#{age}" ></label>
+<input type ="text" class ="form-control" th:field ="*{age}"
+th:errorclass ="is-invalid" />
+<div class ="invalid-feedback" th:errors ="*{age}" ></div>
+</div>
+<!-- Gender -->
+<div th:each ="item : ${genderMap}" class ="form-check-inline" >
+<input type ="radio" class ="form-check-input" th:value ="${item.value}"
+th:field ="*{gender}"  th:errorclass ="is-invalid" />
+<label class ="form-check-label" th:text ="${item.key}" ></label>
+</div>
+<div class ="text-danger" th:if ="${#fields.hasErrors('gender')}"
+th:errors ="*{gender}" >
+</div>
+</div>
+<!-- Signup button -->
+<input type ="submit" th:value ="#{user.signup.btn}"
+class ="btn btn-primary w-100 mt-3" />
+</form>
+</body>
+</html>
